@@ -22,6 +22,6 @@ func GetClient() *ApiClient {
 	return client
 }
 
-func SetToken(token string) {
-	client.Token = &token
+func (c *ApiClient) SetToken(token string) {
+	c.Token = &token
 }

@@ -29,6 +29,6 @@ func Register(symbol string, faction string, email *string) (*responses.Register
 		return nil, err
 	}
 
-	SetToken(result.Data.Token)
+	client.SetToken(result.Data.Token)
 	return result, nil
 }
