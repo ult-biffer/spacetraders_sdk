@@ -32,7 +32,7 @@ func main() {
     }
 
     for ship := range ships {
-        fmt.Printf("%s %s %s", ship.Symbol, ship.Registration.FactionSymbol, ship.Modules[0].Symbol)
+        fmt.Printf("%s %s %s\n", ship.Symbol, ship.Registration.FactionSymbol, ship.Modules[0].Symbol)
     }
 }
 ```
