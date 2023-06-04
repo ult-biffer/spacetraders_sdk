@@ -10,7 +10,6 @@ import (
 func Register(symbol string, faction string, email *string) (*responses.RegisterResponse, error) {
 	client := GetClient()
 	req := requests.NewRegisterRequest(symbol, faction, email)
-
 	resp, err := requests.Execute(req, client.Http, nil)
 
 	if err != nil {
