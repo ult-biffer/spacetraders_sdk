@@ -5,14 +5,13 @@ import (
 	"io"
 	"spacetraders_sdk/requests"
 	"spacetraders_sdk/responses"
-	"time"
 )
 
 func Register(symbol string, faction string, email *string) (*responses.RegisterResponse, error) {
-	client := NewThrottledDefaultClient(time.Second, 2)
+	client := GetClient()
 	req := requests.NewRegisterRequest(symbol, faction, email)
 
-	resp, err := requests.Execute(req, client, nil)
+	resp, err := requests.Execute(req, client.Http, nil)
 
 	if err != nil {
 		return nil, err
@@ -30,5 +29,6 @@ func Register(symbol string, faction string, email *string) (*responses.Register
 		return nil, err
 	}
 
+	SetToken(result.Data.Token)
 	return result, nil
 }
