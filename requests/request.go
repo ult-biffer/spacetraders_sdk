@@ -16,7 +16,7 @@ type Request interface {
 	AuthAllowed() bool
 }
 
-// Supports anything implementing the http.Client.Do method
+// Supports anything implementing the Do method
 
 type RequestDoer interface {
 	Do(*http.Request) (*http.Response, error)
@@ -42,7 +42,6 @@ func Execute(r Request, d RequestDoer, token *string) (*http.Response, error) {
 	}
 
 	resp, err := d.Do(req)
-	defer resp.Body.Close()
 
 	if err != nil {
 		return nil, err
@@ -84,6 +83,7 @@ func handleHttpError(resp *http.Response, r Request, d RequestDoer, token *strin
 	case 502:
 		return recoverFromDdos(r, d, token)
 	default:
+		defer resp.Body.Close()
 		return resp, NewGenericHttpError(resp)
 	}
 }
