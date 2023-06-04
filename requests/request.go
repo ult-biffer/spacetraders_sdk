@@ -1,10 +1,10 @@
 package requests
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
+	"spacetraders_sdk/responses"
 	"time"
 )
 
@@ -14,6 +14,8 @@ type Request interface {
 	Body() (io.Reader, error)
 	AuthRequired() bool
 }
+
+// Supports anything implementing the http.Client.Do method
 
 type RequestDoer interface {
 	Do(*http.Request) (*http.Response, error)
@@ -83,22 +85,13 @@ func handleHttpError(resp *http.Response, r Request, d RequestDoer, token *strin
 }
 
 func retryAfter(resp *http.Response, r Request, d RequestDoer, token *string) (*http.Response, error) {
-	var body map[string]interface{}
-
-	s, err := io.ReadAll(resp.Body)
+	o, err := responses.NewErrorResponse(resp)
 
 	if err != nil {
 		return nil, err
 	}
 
-	if err := json.Unmarshal(s, &body); err != nil {
-		return nil, err
-	}
-
-	e := body["error"].(map[string]interface{})
-	data := e["data"].(map[string]interface{})
-	timeout := data["retryAfter"].(int)
-
+	timeout := o.Error.Data["retryAfter"].(int)
 	timeToWait := time.Duration(timeout) * time.Second
 	time.Sleep(timeToWait)
 

@@ -7,15 +7,15 @@ import (
 )
 
 type RegisterRequest struct {
-	Faction string  `json:"faction"`
 	Symbol  string  `json:"symbol"`
+	Faction string  `json:"faction"`
 	Email   *string `json:"email,omitempty"`
 }
 
 func NewRegisterRequest(symbol string, faction string, email *string) *RegisterRequest {
 	return &RegisterRequest{
-		Faction: faction,
 		Symbol:  symbol,
+		Faction: faction,
 		Email:   email,
 	}
 }

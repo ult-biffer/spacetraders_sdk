@@ -1,26 +1,32 @@
 package requests
 
 import (
+	"fmt"
 	"io"
 	"net/http"
+	"spacetraders_sdk/responses"
 )
 
 type GenericHttpError struct {
-	Body []byte `json:"body"`
+	Response *responses.ErrorResponse
 }
 
 func NewGenericHttpError(resp *http.Response) error {
-	body, err := io.ReadAll(resp.Body)
+	response, err := responses.NewErrorResponse(resp)
 
 	if err != nil {
-		body = []byte{}
+		body, _ := io.ReadAll(resp.Body)
+		defer resp.Body.Close()
+
+		msg := fmt.Sprintf("error response did not match schema: %s", string(body))
+		response = responses.NewFakeErrorResponse(msg)
 	}
 
 	return &GenericHttpError{
-		Body: body,
+		Response: response,
 	}
 }
 
 func (err *GenericHttpError) Error() string {
-	return string(err.Body)
+	return err.Response.Error.Message
 }
