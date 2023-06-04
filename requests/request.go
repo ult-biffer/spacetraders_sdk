@@ -13,6 +13,7 @@ type Request interface {
 	Path() string
 	Body() (io.Reader, error)
 	AuthRequired() bool
+	AuthAllowed() bool
 }
 
 // Supports anything implementing the http.Client.Do method
@@ -33,6 +34,9 @@ func Execute(r Request, d RequestDoer, token *string) (*http.Response, error) {
 			return nil, fmt.Errorf("must supply token for authenticated request")
 		}
 
+		auth := fmt.Sprintf("Bearer %s", *token)
+		req.Header.Add("Authorization", auth)
+	} else if r.AuthAllowed() && token != nil {
 		auth := fmt.Sprintf("Bearer %s", *token)
 		req.Header.Add("Authorization", auth)
 	}

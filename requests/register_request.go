@@ -41,3 +41,7 @@ func (rr *RegisterRequest) Body() (io.Reader, error) {
 func (rr *RegisterRequest) AuthRequired() bool {
 	return false
 }
+
+func (rr *RegisterRequest) AuthAllowed() bool {
+	return false
+}
