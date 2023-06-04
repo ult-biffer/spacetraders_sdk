@@ -1,0 +1,20 @@
+package models
+
+type ShipRole string
+
+const (
+	ROLE_FABRICATOR  ShipRole = "FABRICATOR"
+	ROLE_HARVESTER   ShipRole = "HARVESTER"
+	ROLE_HAULER      ShipRole = "HAULER"
+	ROLE_INTERCEPTOR ShipRole = "INTERCEPTOR"
+	ROLE_EXCAVATOR   ShipRole = "EXCAVATOR"
+	ROLE_TRANSPORT   ShipRole = "TRANSPORT"
+	ROLE_REPAIR      ShipRole = "REPAIR"
+	ROLE_SURVEYOR    ShipRole = "SURVEYOR"
+	ROLE_COMMAND     ShipRole = "COMMAND"
+	ROLE_CARRIER     ShipRole = "CARRIER"
+	ROLE_PATROL      ShipRole = "PATROL"
+	ROLE_SATELLITE   ShipRole = "SATELLITE"
+	ROLE_EXPLORER    ShipRole = "EXPLORER"
+	ROLE_REFINERY    ShipRole = "REFINERY"
+)
