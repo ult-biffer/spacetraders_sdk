@@ -3,14 +3,15 @@ package api
 import (
 	"encoding/json"
 	"io"
+	"spacetraders_sdk/models"
 	"spacetraders_sdk/requests"
 	"spacetraders_sdk/responses"
 )
 
-func Register(symbol string, faction string, email *string) (*responses.RegisterResponse, error) {
+func PurchaseShip(shipType models.ShipType, waypoint string) (*responses.PurchaseShipResponse, error) {
 	c := GetClient()
-	req := requests.NewRegisterRequest(symbol, faction, email)
-	resp, err := requests.Execute(req, c.Http, nil)
+	req := requests.NewPurchaseShipRequest(shipType, waypoint)
+	resp, err := requests.Execute(req, c.Http, c.Token)
 
 	if err != nil {
 		return nil, err
@@ -23,11 +24,10 @@ func Register(symbol string, faction string, email *string) (*responses.Register
 		return nil, err
 	}
 
-	var result responses.RegisterResponse
+	var result responses.PurchaseShipResponse
 	if err := json.Unmarshal(body, &result); err != nil {
 		return nil, err
 	}
 
-	c.SetToken(result.Data.Token)
 	return &result, nil
 }

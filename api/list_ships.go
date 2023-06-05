@@ -37,9 +37,9 @@ func ListAllShips() ([]models.Ship, error) {
 }
 
 func ListShips(page int) (*responses.ListShipsResponse, error) {
-	client := GetClient()
+	c := GetClient()
 	req := requests.NewListShipsRequest(page)
-	resp, err := requests.Execute(req, client.Http, client.Token)
+	resp, err := requests.Execute(req, c.Http, c.Token)
 
 	if err != nil {
 		return nil, err
@@ -52,10 +52,10 @@ func ListShips(page int) (*responses.ListShipsResponse, error) {
 		return nil, err
 	}
 
-	var result *responses.ListShipsResponse
-	if err := json.Unmarshal(body, result); err != nil {
+	var result responses.ListShipsResponse
+	if err := json.Unmarshal(body, &result); err != nil {
 		return nil, err
 	}
 
-	return result, nil
+	return &result, nil
 }
