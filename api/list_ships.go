@@ -1,8 +1,6 @@
 package api
 
 import (
-	"encoding/json"
-	"io"
 	"spacetraders_sdk/models"
 	"spacetraders_sdk/requests"
 	"spacetraders_sdk/responses"
@@ -39,21 +37,9 @@ func ListAllShips() ([]models.Ship, error) {
 func ListShips(page int) (*responses.ListShipsResponse, error) {
 	c := GetClient()
 	req := requests.NewListShipsRequest(page)
-	resp, err := requests.Execute(req, c.Http, c.Token)
-
-	if err != nil {
-		return nil, err
-	}
-
-	defer resp.Body.Close()
-	body, err := io.ReadAll(resp.Body)
-
-	if err != nil {
-		return nil, err
-	}
-
 	var result responses.ListShipsResponse
-	if err := json.Unmarshal(body, &result); err != nil {
+
+	if err := c.ExecuteRequest(req, &result); err != nil {
 		return nil, err
 	}
 
