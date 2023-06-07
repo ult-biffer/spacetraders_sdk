@@ -94,6 +94,39 @@ func CreateChart(symbol string) (*responses.CreateChartResponse, error) {
 	return &result, nil
 }
 
+func CreateSurvey(symbol string) (*responses.CreateSurveyResponse, error) {
+	req := requests.NewCreateSurveyRequest(symbol)
+	var result responses.CreateSurveyResponse
+
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
+func Extract(symbol string, survey *models.Survey) (*responses.ExtractResponse, error) {
+	req := requests.NewExtractRequest(symbol, survey)
+	var result responses.ExtractResponse
+
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
+func DockShip(symbol string) (*models.ShipNav, error) {
+	req := requests.NewDockShipRequest(symbol)
+	var result responses.DockShipResponse
+
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
+		return nil, err
+	}
+
+	return &result.Data.Nav, nil
+}
+
 func OrbitShip(symbol string) (*models.ShipNav, error) {
 	c := GetClient()
 	req := requests.NewOrbitShipRequest(symbol)
