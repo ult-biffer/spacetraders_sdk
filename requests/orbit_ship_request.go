@@ -6,7 +6,7 @@ import (
 )
 
 type OrbitShipRequest struct {
-	Symbol string `json:"symbol"`
+	Symbol string
 }
 
 func NewOrbitShipRequest(symbol string) *OrbitShipRequest {

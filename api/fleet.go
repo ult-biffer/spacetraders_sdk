@@ -82,6 +82,51 @@ func GetShipCooldown(symbol string) (*models.Cooldown, error) {
 	return &result.Data, nil
 }
 
+func DockShip(symbol string) (*models.ShipNav, error) {
+	req := requests.NewDockShipRequest(symbol)
+	var result responses.DockShipResponse
+
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
+		return nil, err
+	}
+
+	return &result.Data.Nav, nil
+}
+
+func JumpShip(ship string, system string) (*responses.JumpShipResponse, error) {
+	req := requests.NewJumpShipRequest(ship, system)
+	var result responses.JumpShipResponse
+
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
+func NavigateShip(ship string, waypoint string) (*responses.NavigateShipResponse, error) {
+	req := requests.NewNavigateShipRequest(ship, waypoint)
+	var result responses.NavigateShipResponse
+
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
+func OrbitShip(symbol string) (*models.ShipNav, error) {
+	c := GetClient()
+	req := requests.NewOrbitShipRequest(symbol)
+	var result responses.OrbitShipResponse
+
+	if err := c.ExecuteRequest(req, &result); err != nil {
+		return nil, err
+	}
+
+	return &result.Data.Nav, nil
+}
+
 func CreateChart(symbol string) (*responses.CreateChartResponse, error) {
 	c := GetClient()
 	req := requests.NewCreateChartRequest(symbol)
@@ -116,27 +161,15 @@ func Extract(symbol string, survey *models.Survey) (*responses.ExtractResponse, 
 	return &result, nil
 }
 
-func DockShip(symbol string) (*models.ShipNav, error) {
-	req := requests.NewDockShipRequest(symbol)
-	var result responses.DockShipResponse
+func JettisonCargo(ship string, symbol models.TradeSymbol, units int) (*models.ShipCargo, error) {
+	req := requests.NewJettisonCargoRequest(ship, symbol, units)
+	var result responses.JettisonCargoResponse
 
 	if err := GetClient().ExecuteRequest(req, &result); err != nil {
 		return nil, err
 	}
 
-	return &result.Data.Nav, nil
-}
-
-func OrbitShip(symbol string) (*models.ShipNav, error) {
-	c := GetClient()
-	req := requests.NewOrbitShipRequest(symbol)
-	var result responses.OrbitShipResponse
-
-	if err := c.ExecuteRequest(req, &result); err != nil {
-		return nil, err
-	}
-
-	return &result.Data.Nav, nil
+	return &result.Data.Cargo, nil
 }
 
 func PurchaseShip(shipType models.ShipType, waypoint string) (*responses.PurchaseShipResponse, error) {

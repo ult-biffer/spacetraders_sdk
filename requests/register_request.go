@@ -1,8 +1,6 @@
 package requests
 
 import (
-	"bytes"
-	"encoding/json"
 	"io"
 )
 
@@ -29,13 +27,7 @@ func (rr *RegisterRequest) Path() string {
 }
 
 func (rr *RegisterRequest) Body() (io.Reader, error) {
-	bts, err := json.Marshal(rr)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return bytes.NewReader(bts), nil
+	return marshal(rr)
 }
 
 func (rr *RegisterRequest) AuthRequired() bool {

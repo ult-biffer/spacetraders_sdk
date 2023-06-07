@@ -1,8 +1,6 @@
 package requests
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
 	"io"
 	"spacetraders_sdk/models"
@@ -33,13 +31,7 @@ func (req *ExtractRequest) Body() (io.Reader, error) {
 		return nil, nil
 	}
 
-	body, err := json.Marshal(req)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return bytes.NewReader(body), nil
+	return marshal(req)
 }
 
 func (req *ExtractRequest) AuthRequired() bool {

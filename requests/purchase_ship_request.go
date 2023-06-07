@@ -1,8 +1,6 @@
 package requests
 
 import (
-	"bytes"
-	"encoding/json"
 	"io"
 	"spacetraders_sdk/models"
 )
@@ -28,13 +26,7 @@ func (req *PurchaseShipRequest) Path() string {
 }
 
 func (req *PurchaseShipRequest) Body() (io.Reader, error) {
-	bts, err := json.Marshal(req)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return bytes.NewReader(bts), nil
+	return marshal(req)
 }
 
 func (req *PurchaseShipRequest) AuthRequired() bool {

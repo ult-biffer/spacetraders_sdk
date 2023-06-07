@@ -1,6 +1,8 @@
 package requests
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -107,4 +109,14 @@ func recoverFromDdos(r Request, d RequestDoer, token *string) (*http.Response, e
 	time.Sleep(timeToWait)
 
 	return Execute(r, d, token)
+}
+
+func marshal(r Request) (io.Reader, error) {
+	body, err := json.Marshal(r)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return bytes.NewReader(body), nil
 }
