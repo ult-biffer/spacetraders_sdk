@@ -82,6 +82,50 @@ func GetShipCooldown(symbol string) (*models.Cooldown, error) {
 	return &result.Data, nil
 }
 
+func GetShipNav(symbol string) (*models.ShipNav, error) {
+	req := requests.NewGetShipNavRequest(symbol)
+	var result responses.ShipNavResponse
+
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
+		return nil, err
+	}
+
+	return &result.Data, nil
+}
+
+func GetShipMounts(symbol string) ([]models.ShipMount, error) {
+	req := requests.NewGetShipMountsRequest(symbol)
+	var result responses.GetShipMountsResponse
+
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
+		return nil, err
+	}
+
+	return result.Data, nil
+}
+
+func InstallShipMount(ship string, symbol models.ShipMountSymbol) (*responses.AlterShipMountsResponse, error) {
+	req := requests.NewInstallShipMountRequest(ship, symbol)
+	var result responses.AlterShipMountsResponse
+
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
+func RemoveShipMount(ship string, symbol models.ShipMountSymbol) (*responses.AlterShipMountsResponse, error) {
+	req := requests.NewRemoveShipMountRequest(ship, symbol)
+	var result responses.AlterShipMountsResponse
+
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
 func DockShip(symbol string) (*models.ShipNav, error) {
 	req := requests.NewDockShipRequest(symbol)
 	var result responses.DockShipResponse
@@ -125,6 +169,17 @@ func OrbitShip(symbol string) (*models.ShipNav, error) {
 	}
 
 	return &result.Data.Nav, nil
+}
+
+func WarpShip(ship string, waypoint string) (*responses.WarpShipResponse, error) {
+	req := requests.NewWarpShipRequest(ship, waypoint)
+	var result responses.WarpShipResponse
+
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
+		return nil, err
+	}
+
+	return &result, nil
 }
 
 func CreateChart(symbol string) (*responses.CreateChartResponse, error) {
@@ -172,6 +227,39 @@ func JettisonCargo(ship string, symbol models.TradeSymbol, units int) (*models.S
 	return &result.Data.Cargo, nil
 }
 
+func NegotiateContract(ship string) (*models.Contract, error) {
+	req := requests.NewNegotiateContractRequest(ship)
+	var result responses.NegotiateContractResponse
+
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
+		return nil, err
+	}
+
+	return &result.Data.Contract, nil
+}
+
+func PatchShipNav(symbol string, mode models.ShipNavFlightMode) (*models.ShipNav, error) {
+	req := requests.NewPatchShipNavRequest(symbol, mode)
+	var result responses.ShipNavResponse
+
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
+		return nil, err
+	}
+
+	return &result.Data, nil
+}
+
+func PurchaseCargo(ship string, symbol models.TradeSymbol, units int) (*responses.CargoTransactionResponse, error) {
+	req := requests.NewPurchaseCargoRequest(ship, symbol, units)
+	var result responses.CargoTransactionResponse
+
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
 func PurchaseShip(shipType models.ShipType, waypoint string) (*responses.PurchaseShipResponse, error) {
 	c := GetClient()
 	req := requests.NewPurchaseShipRequest(shipType, waypoint)
@@ -184,12 +272,78 @@ func PurchaseShip(shipType models.ShipType, waypoint string) (*responses.Purchas
 	return &result, nil
 }
 
+func RefuelShip(ship string) (*responses.RefuelResponse, error) {
+	req := requests.NewRefuelRequest(ship)
+	var result responses.RefuelResponse
+
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
+func ScanShips(ship string) (*responses.ScanShipsResponse, error) {
+	req := requests.NewScanShipsRequest(ship)
+	var result responses.ScanShipsResponse
+
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
+func ScanSystems(ship string) (*responses.ScanSystemsResponse, error) {
+	req := requests.NewScanSystemsRequest(ship)
+	var result responses.ScanSystemsResponse
+
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
+func ScanWaypoints(ship string) (*responses.ScanWaypointsResponse, error) {
+	req := requests.NewScanWaypointsRequest(ship)
+	var result responses.ScanWaypointsResponse
+
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
+func SellCargo(ship string, symbol models.TradeSymbol, units int) (*responses.CargoTransactionResponse, error) {
+	req := requests.NewSellCargoRequest(ship, symbol, units)
+	var result responses.CargoTransactionResponse
+
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
 func ShipRefine(symbol string, produce models.TradeSymbol) (*responses.ShipRefineResponse, error) {
 	c := GetClient()
 	req := requests.NewShipRefineRequest(symbol, produce)
 	var result responses.ShipRefineResponse
 
 	if err := c.ExecuteRequest(req, &result); err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
+func TransferCargo(src, dest string, symbol models.TradeSymbol, units int) (*responses.WrappedCargoResponse, error) {
+	req := requests.NewTransferCargoRequest(src, dest, symbol, units)
+	var result responses.WrappedCargoResponse
+
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
 		return nil, err
 	}
 
