@@ -29,6 +29,10 @@ func (c *ApiClient) SetToken(token string) {
 	c.Token = &token
 }
 
+func (c *ApiClient) SetRate(requests int, period time.Duration) {
+	c.Http = NewThrottledDefaultClient(period, requests)
+}
+
 func (c *ApiClient) ExecuteRequest(req requests.Request, resp any) error {
 	r, err := requests.Execute(req, c.Http, c.Token)
 
