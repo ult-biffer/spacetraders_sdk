@@ -10,7 +10,7 @@ type ListFactionsResponse struct {
 	Meta models.Meta      `json:"meta"`
 }
 
-func (resp *ListFactionsResponse) Pages() int {
+func (resp ListFactionsResponse) Pages() int {
 	f := float64(resp.Meta.Total) / float64(models.MAX_LIMIT)
 	return int(math.Ceil(f))
 }

@@ -44,3 +44,14 @@ func ListFactions(page int) (*responses.ListFactionsResponse, error) {
 
 	return &result, nil
 }
+
+func GetFaction(symbol string) (*models.Faction, error) {
+	req := requests.NewGetFactionRequest(symbol)
+	var result responses.GetFactionResponse
+
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
+		return nil, err
+	}
+
+	return &result.Data, nil
+}
