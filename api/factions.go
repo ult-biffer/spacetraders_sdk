@@ -16,10 +16,6 @@ func ListAllFactions() ([]models.Faction, error) {
 	factions := resp.Data
 	pages := resp.Pages()
 
-	if pages < 2 {
-		return factions, nil
-	}
-
 	for i := 2; i < pages; i++ {
 		resp, err := ListFactions(i)
 

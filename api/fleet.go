@@ -16,10 +16,6 @@ func ListAllShips() ([]models.Ship, error) {
 	ships := resp.Data
 	pages := resp.Pages()
 
-	if pages < 2 {
-		return ships, nil
-	}
-
 	for i := 2; i < pages; i++ {
 		resp, err := ListShips(i)
 

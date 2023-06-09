@@ -16,10 +16,6 @@ func ListAllContracts() ([]models.Contract, error) {
 	contracts := resp.Data
 	pages := resp.Pages()
 
-	if pages < 2 {
-		return contracts, nil
-	}
-
 	for i := 2; i < pages; i++ {
 		resp, err = ListContracts(i)
 
