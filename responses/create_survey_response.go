@@ -1,6 +1,6 @@
 package responses
 
-import "spacetraders_sdk/models"
+import "github.com/ult-biffer/spacetraders_sdk/models"
 
 type CreateSurveyResponse struct {
 	Data CreateSurveyResponseData `json:"data"`

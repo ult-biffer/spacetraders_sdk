@@ -2,7 +2,8 @@ package responses
 
 import (
 	"math"
-	"spacetraders_sdk/models"
+
+	"github.com/ult-biffer/spacetraders_sdk/models"
 )
 
 type ListShipsResponse struct {

@@ -3,7 +3,8 @@ package requests
 import (
 	"fmt"
 	"io"
-	"spacetraders_sdk/util"
+
+	"github.com/ult-biffer/spacetraders_sdk/util"
 )
 
 type GetJumpGateRequest struct {

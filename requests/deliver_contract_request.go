@@ -3,7 +3,8 @@ package requests
 import (
 	"fmt"
 	"io"
-	"spacetraders_sdk/models"
+
+	"github.com/ult-biffer/spacetraders_sdk/models"
 )
 
 type DeliverContractRequest struct {

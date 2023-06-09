@@ -2,7 +2,8 @@ package requests
 
 import (
 	"io"
-	"spacetraders_sdk/models"
+
+	"github.com/ult-biffer/spacetraders_sdk/models"
 )
 
 type PurchaseShipRequest struct {

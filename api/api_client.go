@@ -4,8 +4,9 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
-	"spacetraders_sdk/requests"
 	"time"
+
+	"github.com/ult-biffer/spacetraders_sdk/requests"
 )
 
 type ApiClient struct {

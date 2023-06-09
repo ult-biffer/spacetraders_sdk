@@ -1,8 +1,8 @@
 package api
 
 import (
-	"spacetraders_sdk/requests"
-	"spacetraders_sdk/responses"
+	"github.com/ult-biffer/spacetraders_sdk/requests"
+	"github.com/ult-biffer/spacetraders_sdk/responses"
 )
 
 func Register(symbol string, faction string, email *string) (*responses.RegisterResponse, error) {

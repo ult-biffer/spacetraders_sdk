@@ -6,8 +6,9 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"spacetraders_sdk/responses"
 	"time"
+
+	"github.com/ult-biffer/spacetraders_sdk/responses"
 )
 
 type Request interface {

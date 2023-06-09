@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"spacetraders_sdk/responses"
+
+	"github.com/ult-biffer/spacetraders_sdk/responses"
 )
 
 type GenericHttpError struct {

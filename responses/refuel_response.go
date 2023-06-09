@@ -1,6 +1,6 @@
 package responses
 
-import "spacetraders_sdk/models"
+import "github.com/ult-biffer/spacetraders_sdk/models"
 
 type RefuelResponse struct {
 	Data RefuelResponseData `json:"data"`

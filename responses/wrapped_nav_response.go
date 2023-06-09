@@ -1,6 +1,6 @@
 package responses
 
-import "spacetraders_sdk/models"
+import "github.com/ult-biffer/spacetraders_sdk/models"
 
 type WrappedNavResponse struct {
 	Data WrappedNavResponseData `json:"data"`

@@ -1,4 +1,4 @@
-module spacetraders_sdk
+module github.com/ult-biffer/spacetraders_sdk
 
 go 1.20
 

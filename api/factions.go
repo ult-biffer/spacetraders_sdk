@@ -1,9 +1,9 @@
 package api
 
 import (
-	"spacetraders_sdk/models"
-	"spacetraders_sdk/requests"
-	"spacetraders_sdk/responses"
+	"github.com/ult-biffer/spacetraders_sdk/models"
+	"github.com/ult-biffer/spacetraders_sdk/requests"
+	"github.com/ult-biffer/spacetraders_sdk/responses"
 )
 
 func ListAllFactions() ([]models.Faction, error) {
