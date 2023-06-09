@@ -31,11 +31,10 @@ func ListAllShips() ([]models.Ship, error) {
 }
 
 func ListShips(page int) (*responses.ListShipsResponse, error) {
-	c := GetClient()
 	req := requests.NewListShipsRequest(page)
 	var result responses.ListShipsResponse
 
-	if err := c.ExecuteRequest(req, &result); err != nil {
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
 		return nil, err
 	}
 
@@ -43,11 +42,10 @@ func ListShips(page int) (*responses.ListShipsResponse, error) {
 }
 
 func GetShip(symbol string) (*models.Ship, error) {
-	c := GetClient()
 	req := requests.NewGetShipRequest(symbol)
 	var result responses.GetShipResponse
 
-	if err := c.ExecuteRequest(req, &result); err != nil {
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
 		return nil, err
 	}
 
@@ -55,11 +53,10 @@ func GetShip(symbol string) (*models.Ship, error) {
 }
 
 func GetShipCargo(symbol string) (*models.ShipCargo, error) {
-	c := GetClient()
 	req := requests.NewGetShipCargoRequest(symbol)
 	var result responses.GetShipCargoResponse
 
-	if err := c.ExecuteRequest(req, &result); err != nil {
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
 		return nil, err
 	}
 
@@ -67,11 +64,10 @@ func GetShipCargo(symbol string) (*models.ShipCargo, error) {
 }
 
 func GetShipCooldown(symbol string) (*models.Cooldown, error) {
-	c := GetClient()
 	req := requests.NewGetShipCooldownRequest(symbol)
 	var result responses.GetShipCooldownResponse
 
-	if err := c.ExecuteRequest(req, &result); err != nil {
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
 		return nil, err
 	}
 
@@ -156,11 +152,10 @@ func NavigateShip(ship string, waypoint string) (*responses.NavigateShipResponse
 }
 
 func OrbitShip(symbol string) (*models.ShipNav, error) {
-	c := GetClient()
 	req := requests.NewOrbitShipRequest(symbol)
 	var result responses.OrbitShipResponse
 
-	if err := c.ExecuteRequest(req, &result); err != nil {
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
 		return nil, err
 	}
 
@@ -179,11 +174,10 @@ func WarpShip(ship string, waypoint string) (*responses.WarpShipResponse, error)
 }
 
 func CreateChart(symbol string) (*responses.CreateChartResponse, error) {
-	c := GetClient()
 	req := requests.NewCreateChartRequest(symbol)
 	var result responses.CreateChartResponse
 
-	if err := c.ExecuteRequest(req, &result); err != nil {
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
 		return nil, err
 	}
 
@@ -257,11 +251,10 @@ func PurchaseCargo(ship string, symbol models.TradeSymbol, units int) (*response
 }
 
 func PurchaseShip(shipType models.ShipType, waypoint string) (*responses.PurchaseShipResponse, error) {
-	c := GetClient()
 	req := requests.NewPurchaseShipRequest(shipType, waypoint)
 	var result responses.PurchaseShipResponse
 
-	if err := c.ExecuteRequest(req, &result); err != nil {
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
 		return nil, err
 	}
 
@@ -324,11 +317,10 @@ func SellCargo(ship string, symbol models.TradeSymbol, units int) (*responses.Ca
 }
 
 func ShipRefine(symbol string, produce models.TradeSymbol) (*responses.ShipRefineResponse, error) {
-	c := GetClient()
 	req := requests.NewShipRefineRequest(symbol, produce)
 	var result responses.ShipRefineResponse
 
-	if err := c.ExecuteRequest(req, &result); err != nil {
+	if err := GetClient().ExecuteRequest(req, &result); err != nil {
 		return nil, err
 	}
 
