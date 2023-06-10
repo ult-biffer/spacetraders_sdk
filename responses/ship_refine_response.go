@@ -7,8 +7,8 @@ type ShipRefineResponse struct {
 }
 
 type ShipRefineResponseData struct {
-	Cargo    models.ShipCargo        `json:"cargo"`
-	Cooldown models.Cooldown         `json:"cooldown"`
-	Produced models.RefinedTradeGood `json:"produced"`
-	Consumed models.RefinedTradeGood `json:"consumed"`
+	Cargo    models.ShipCargo          `json:"cargo"`
+	Cooldown models.Cooldown           `json:"cooldown"`
+	Produced []models.RefinedTradeGood `json:"produced"`
+	Consumed []models.RefinedTradeGood `json:"consumed"`
 }
